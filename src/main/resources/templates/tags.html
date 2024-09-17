@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/styling.css}" rel="stylesheet">
+
+    <title>Tags</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th th:text="${attractionName} + ' tags'"> Tags </th>
+    </tr>
+    <tr th:each="tag : ${attraction}">
+        <td th:text="${tag}"></td>
+    </tr>
+</table>
+<form th:action="@{/attractions}" method="get">
+    <button type="submit">Back</button>
+</form>
+</body>
+</html>

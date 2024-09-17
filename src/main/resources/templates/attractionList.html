@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/styling.css}" rel="stylesheet">
+
+    <title>Attraction List</title>
+
+</head>
+<body>
+
+<h1>Tourist Attractions: </h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Attraction</th>
+        <th>Description</th>
+        <th>City</th>
+    </tr>
+    <tr th:each="attraction : ${attractions}">
+        <td th:text="${attraction.touristAttractionId}"></td>
+        <td th:text="${attraction.name}"></td>
+        <td th:text="${attraction.description}"></td>
+        <td th:text="${attraction.city}"></td>
+
+        <td>
+            <form th:action="@{'/' + ${attraction.name} + '/tags'}" method="get">
+            <button type="Tags">Tags</button>
+            </form>
+        </td>
+
+        <td>
+            <form th:action="@{'/' + ${attraction.name} + '/edit'}" method="get">
+                <button type="submit">Edit</button>
+            </form>
+        </td>
+
+        <td>
+            <form th:action="@{'/' + ${attraction.name} + '/delete'}" method="get">
+                <button disabled type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<button type="button" th:onclick="|window.location.href='/add'|">Add attraction</button>
+
+</body>
+</html>

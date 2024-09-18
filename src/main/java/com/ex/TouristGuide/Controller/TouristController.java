@@ -54,7 +54,7 @@ public class TouristController {
 
     @PostMapping("/save")
     public String submitForm(@ModelAttribute("myModel") TouristAttraction touristAttraction) {
-        if (touristAttraction.getOriginalName() != null && !touristAttraction.getOriginalName().isEmpty()) {
+        if (touristAttraction.getOriginalName() != null && !touristAttraction.getOriginalName().isEmpty()) { // REMOVE/REFACTOR
             // Edit operation
             touristService.editAttraction(touristAttraction);
         } else {
@@ -63,10 +63,4 @@ public class TouristController {
         }
         return "redirect:/attractions";
     }
-
-
-
-
-
-
 }

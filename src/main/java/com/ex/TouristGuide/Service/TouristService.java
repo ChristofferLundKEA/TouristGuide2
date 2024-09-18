@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class TouristService {
 
-    private TouristRepository touristRepository;
+    private final TouristRepository touristRepository;
 
     public TouristService(TouristRepository touristRepository) {
         this.touristRepository = touristRepository;
@@ -17,16 +17,14 @@ public class TouristService {
 
     public void createAttraction(TouristAttraction attraction) {
         if (findByNameForNew(attraction.getName()) == null) {
-            // Add the new attraction
-            attraction.setOriginalName(attraction.getName());
-            touristRepository.getTouristAttractions().add(attraction);
+            attraction.setOriginalName(attraction.getName()); // REMOVE/REFACTOR
+            touristRepository.getTouristAttractions().add(attraction); // Add the new attraction
 
         } else {
             throw new IllegalStateException("Attraction with name '" + attraction.getName() + "' already exists.");
         }
     }
 
-    // Edit an existing attraction (used in submitForm for editing)
     public void editAttraction(TouristAttraction updatedAttraction) {
         List<TouristAttraction> attractions = touristRepository.getTouristAttractions();
 
@@ -39,7 +37,7 @@ public class TouristService {
         throw new IllegalStateException("Attraction with name '" + updatedAttraction.getOriginalName() + "' not found.");
     }
 
-    public TouristAttraction findByNameForEdit(String name) {
+    public TouristAttraction findByNameForEdit(String name) { // REMOVE/REFACTOR
         List<TouristAttraction> attractions = touristRepository.getTouristAttractions();
         for (TouristAttraction attraction : attractions) {
             if (attraction.getName().equals(name)) {
@@ -49,7 +47,7 @@ public class TouristService {
         throw new IllegalStateException("Attraction should always exist");
     }
 
-    public TouristAttraction findByNameForNew(String name) {
+    public TouristAttraction findByNameForNew(String name) { // REMOVE/REFACTOR
         List<TouristAttraction> attractions = touristRepository.getTouristAttractions();
         for (TouristAttraction attraction : attractions) {
             if (attraction.getName().equalsIgnoreCase(name)) {
@@ -59,10 +57,9 @@ public class TouristService {
         return null;
     }
 
-    public TouristAttraction findByName(String name) {
-        return findByNameForEdit(name);  // Use the same logic as editing, for the tags view
+    public TouristAttraction findByName(String name) { // REMOVE/REFACTOR
+        return findByNameForEdit(name);
     }
-
 
     public List<TouristAttraction> get() {
         return touristRepository.getTouristAttractions();

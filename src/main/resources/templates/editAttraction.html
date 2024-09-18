@@ -6,16 +6,30 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link th:href="@{/css/styling.css}" rel="stylesheet">
 
-  <title>Add Attraction</title>
-
+  <title>Edit Attraction</title>
 </head>
 
 <body>
 
+<header>
+  <h1>header</h1>
+</header>
+
+<nav>
+  <h2>nav</h2>
+  <ul>
+    <li>item</li>
+    <li>item</li>
+    <li>item</li>
+  </ul>
+</nav>
+
+<main>
+
 <form action="#" th:action="@{/save}" th:object="${myModel}" method="post">
 
   <label for="name">Name: </label>
-  <input type="text" id="name" th:field="*{name}" /><br>
+  <input type="text" id="name" th:field="*{name}" th:readonly="true" /><br>
 
   <label for="description">Description: </label>
   <input type="text" id="description" th:field="*{description}"><br>
@@ -36,6 +50,10 @@
   <button type="button" th:onclick="|window.history.back()|">Back</button>
 
 </form>
+
+</main>
+
+<footer><h2>footer</h2></footer>
 
 </body>
 </html>

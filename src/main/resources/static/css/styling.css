@@ -4,3 +4,62 @@ table, th, td {
     padding: 2px 2px 2px 2px;
 
 }
+
+/*TAGET FRA "Introduktion til HTML CSS 2" SLIDES*/
+
+/* Placering af indhold i grid-områder */
+header {
+    grid-area: header;
+}
+
+nav {
+    grid-area: nav;
+}
+
+main {
+    grid-area: main;
+}
+
+footer {
+    grid-area: footer;
+}
+
+/* Styling */
+body {
+    background: #3c1361;
+}
+
+header, nav, main, footer {
+    background: #f4f4f4;
+    padding: 1em;
+}
+
+
+/* Mobile first layout */
+body {
+    min-height: 100vh; /* Sæt body-højden til mindst 100% af skærmhøjden */
+    display: grid; /* Aktiverer grid-layout */
+    grid-gap: 1em; /* Mellemrum mellem grid-områder */
+    grid-template-areas:
+        'header'  /* Headeren fylder hele bredden */
+        'nav'     /* Navigationen fylder hele bredden */
+        'main'    /* Hovedindholdet fylder hele bredden */
+        'footer'; /* Foderen fylder hele bredden */
+    grid-template-rows: auto auto 1fr auto; /* Højden på rækkerne */
+    grid-template-columns: 1fr; /* Kun én kolonne */
+}
+
+/* Bruges hvis min-width er 40em eller større */
+@media (min-width: 40em) {
+    body {
+        /* Horisontal centrering, 80% bredde */
+        width: 80%;
+        margin: 0 auto;
+        grid-template-areas:
+            'header header'  /* Headeren fylder begge kolonner */
+            'nav main'       /* Navigationen til venstre, hovedindhold til højre */
+            'footer footer'; /* Foderen fylder begge kolonner */
+        grid-template-columns: 12em 1fr; /* To kolonner: nav er 12em bred, main fylder resten */
+        grid-template-rows: auto 1fr auto; /* Højden på rækkerne */
+    }
+}

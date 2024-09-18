@@ -10,24 +10,28 @@ import java.util.List;
 @Repository
 public class TouristRepository {
 
-    private final List<TouristAttraction> touristAttractions = new ArrayList<>();
+    private List<TouristAttraction> touristAttractions = new ArrayList<>();
 
     public TouristRepository(){
         populateAttractions();
     }
 
     private void populateAttractions(){
-        touristAttractions.add(new TouristAttraction(1, "Tivoli", "Forlystelsespark",
+        touristAttractions.add(new TouristAttraction("Tivoli", "Forlystelsespark",
                 "COPENHAGEN", List.of(Tag.ENTERTAINMENT, Tag.ROLLER_COASTER, Tag.CANDY)));
 
-        touristAttractions.add(new TouristAttraction(2, "Københavns ZOO", "Zoologisk have",
+        touristAttractions.add(new TouristAttraction("Københavns ZOO", "Zoologisk have",
                 "FREDERIKSBERG", List.of(Tag.ANIMALS, Tag.PLAYGROUND, Tag.ENTERTAINMENT)));
 
-        touristAttractions.add(new TouristAttraction(3, "Nationalmuseet", "Danmarks statslige, kulturhistoriske hovedmuseum",
+        touristAttractions.add(new TouristAttraction("Nationalmuseet", "Danmarks statslige, kulturhistoriske hovedmuseum",
                 "COPENHAGEN", List.of(Tag.MUSEUM, Tag.ANCIENT_TIMES, Tag.PAINTINGS, Tag.CAFE, Tag.WEDDINGS)));
     }
 
     public List<TouristAttraction> getTouristAttractions() {
         return touristAttractions;
+    }
+
+    public void setTouristAttractions(List<TouristAttraction> touristAttractions) {
+        this.touristAttractions = touristAttractions;
     }
 }

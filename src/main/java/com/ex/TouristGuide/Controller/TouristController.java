@@ -19,7 +19,12 @@ public class TouristController {
         this.touristService = touristService;
     }
 
-    @GetMapping("attractions")
+    @GetMapping("/") //redirect view to index.html at some point
+    public String tourist(Model model) {
+        return "attractionList";
+    }
+
+    @GetMapping("/attractions")
     public String showAttractions(Model model){
         List<TouristAttraction> attractions = touristService.get();
         model.addAttribute("attractions", attractions);
@@ -45,21 +50,29 @@ public class TouristController {
 
     @GetMapping("/{name}/edit")
     public String editAttraction(@PathVariable String name, Model model) {
-        TouristAttraction attraction = touristService.findByNameForEdit(name);
+        TouristAttraction attraction = touristService.findByName(name);
         model.addAttribute("myModel", attraction);
         model.addAttribute("cityEnum", City.values());
         model.addAttribute("tagsEnum", Tag.values());
-        return "addAttraction";
+        return "editAttraction";
     }
 
     @PostMapping("/save")
     public String submitForm(@ModelAttribute("myModel") TouristAttraction touristAttraction) {
-        if (touristAttraction.getOriginalName() != null && !touristAttraction.getOriginalName().isEmpty()) { // REMOVE/REFACTOR
-            // Edit operation
-            touristService.editAttraction(touristAttraction);
-        } else {
-            // Create a new attraction
+
+        if (touristService.findByName(touristAttraction.getName()) == null) {
             touristService.createAttraction(touristAttraction);
+        } else {
+            touristService.editAttraction(touristAttraction);
+        }
+        return "redirect:/attractions";
+    }
+
+    @GetMapping("/{name}/delete")
+    public String deleteAttraction(@PathVariable String name, TouristAttraction touristAttraction) {
+
+        if (touristService.findByName(name) != null) {
+            touristService.deleteAttraction(touristAttraction);
         }
         return "redirect:/attractions";
     }

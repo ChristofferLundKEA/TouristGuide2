@@ -26,7 +26,20 @@ footer {
 
 /* Styling */
 body {
-    background: #3c1361;
+    background-image: url('../images/Denmark.jpg'); /* Ret stien til dit billede */
+    background-size: cover; /* Sørger for, at billedet dækker hele skærmen */
+    background-repeat: no-repeat; /* Undgår gentagelse af billedet */
+    background-position: center center; /* Centrerer billedet */
+    min-height: 100vh; /* Sørger for, at body fylder mindst hele skærmhøjden */
+    display: grid;
+    grid-gap: 1em;
+    grid-template-areas:
+        'header'
+        'nav'
+        'main'
+        'footer';
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: 1fr;
 }
 
 header, nav, main, footer {

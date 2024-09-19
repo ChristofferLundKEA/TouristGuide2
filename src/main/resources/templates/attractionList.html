@@ -5,64 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link th:href="@{/css/styling.css}" rel="stylesheet">
-
     <title>Attraction List</title>
 </head>
 
 <body>
+<div id="background"></div>
 
 <header>
-    <h1>header</h1>
+    <h1>WELCOME TO YOUR GUIDE TO DENMARK</h1>
 </header>
 
 <nav>
-    <h2>nav</h2>
-    <ul>
-        <li>item</li>
-        <li>item</li>
-        <li>item</li>
-    </ul>
+    <h2 class="slogan">Udforsk verden, én destination ad gangen!</h2>
+    <p class="description">Velkommen til din alt-i-en platform for turistattraktioner!<br>
+        Her kan du nemt oprette, administrere og dele attraktioner fra hele verden.<br>
+        Uanset om du er turist, lokal eller virksomhed, giver vi dig en enkel løsning til at fremhæve byens bedste oplevelser.
+    </p>
 </nav>
 
 <main>
+    <h1>Tourist Attractions:</h1>
+    <table id="attractiontable">
+        <tr>
+            <th>Attraction</th>
+            <th>Description</th>
+            <th>City</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="attraction : ${attractions}">
+            <td th:text="${attraction.name}"></td>
+            <td th:text="${attraction.description}"></td>
+            <td th:text="${attraction.city}"></td>
+            <td>
+                <form th:action="@{'/' + ${attraction.name} + '/tags'}" method="get" style="display:inline;">
+                    <button type="Tags">Tags</button>
+                </form>
+                <form th:action="@{'/' + ${attraction.name} + '/edit'}" method="get" style="display:inline;">
+                    <button type="submit">Edit</button>
+                </form>
+                <form th:action="@{'/' + ${attraction.name} + '/delete'}" method="get" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
 
-    <h1>Tourist Attractions: </h1>
-<table>
-    <tr>
-        <th>Attraction</th>
-        <th>Description</th>
-        <th>City</th>
-    </tr>
-    <tr th:each="attraction : ${attractions}">
-        <td th:text="${attraction.name}"></td>
-        <td th:text="${attraction.description}"></td>
-        <td th:text="${attraction.city}"></td>
-
-        <td>
-            <form th:action="@{'/' + ${attraction.name} + '/tags'}" method="get">
-            <button type="Tags">Tags</button>
-            </form>
-        </td>
-
-        <td>
-            <form th:action="@{'/' + ${attraction.name} + '/edit'}" method="get">
-                <button type="submit">Edit</button>
-            </form>
-        </td>
-
-        <td>
-            <form th:action="@{'/' + ${attraction.name} + '/delete'}" method="get">
-                <button type="submit">Delete</button>
-            </form>
-        </td>
-    </tr>
-</table>
-
-<button type="button" th:onclick="|window.location.href='/add'|">Add attraction</button>
-
+    <button type="button" th:onclick="|window.location.href='/add'|">Add attraction</button>
 </main>
 
 <footer><h2>footer</h2></footer>
+
+<script>
+    // Liste over baggrundsbilleder
+    const backgroundImages = [
+        '../images/Denmark.jpg',
+        '../images/Denmark1.jpg',
+        '../images/Denmark2.jpg',
+        '../images/Denmark3.webp',
+        '../images/Denmark4.jpg',
+        '../images/Denmark5.jpg',
+        '../images/Denmark6.jpg',
+    ];
+
+    let currentIndex = 0;
+
+    function changeBackground() {
+        const backgroundDiv = document.getElementById('background');
+        // Fade ud
+        backgroundDiv.style.transition = 'opacity 1s ease-in-out';
+        backgroundDiv.style.opacity = 0;
+
+        setTimeout(() => {
+            // Skift billede
+            backgroundDiv.style.backgroundImage = `url('${backgroundImages[currentIndex]}')`;
+            currentIndex = (currentIndex + 1) % backgroundImages.length;
+
+            // Fade ind
+            backgroundDiv.style.opacity = 1;
+        }, 1000); // Matcher overgangstiden fra fade ud
+
+        setTimeout(changeBackground, 5000); // Skift billede hvert 5. sekund
+    }
+
+    window.onload = changeBackground;
+</script>
 
 </body>
 </html>

@@ -1,11 +1,58 @@
-table, th, td {
-    border: 1px solid black;
-    margin-bottom: 1px;
-    padding: 2px 2px 2px 2px;
-
+/* Generel font styling */
+* {
+    font-family: Arial, sans-serif;
 }
 
-/*TAGET FRA "Introduktion til HTML CSS 2" SLIDES*/
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Fjerner mellemrummene mellem cellerne */
+    margin-bottom: 20px; /* Giver lidt luft under tabellen */
+}
+
+th, td {
+    padding: 12px 15px; /* Mere plads i cellerne */
+    text-align: left; /* Juster tekst til venstre */
+    border: 1px solid #ddd; /* Diskrete linjer mellem cellerne */
+}
+
+th {
+    background-color: #0000FFFF; /* Lilla baggrundsfarve */
+    color: white; /* Hvid skriftfarve */
+    font-weight: bold;
+    text-transform: uppercase; /* Gør overskrifter til store bogstaver */
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Lys grå baggrund for hver anden række */
+}
+
+tr:hover {
+    background-color: #ddd; /* Fremhæv række, når man holder musen over */
+}
+
+/* Knap styling i tabellen */
+button {
+    padding: 8px 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+button[type="Tags"] {
+    background-color: #007bff;
+}
+
+button[type="Tags"]:hover {
+    background-color: #0056b3;
+}
 
 /* Placering af indhold i grid-områder */
 header {
@@ -25,12 +72,17 @@ footer {
 }
 
 /* Styling */
+html, body {
+    height: 100%; /* Sørger for, at html og body fylder hele skærmen */
+    margin: 0; /* Fjern margin for at sikre korrekt layout */
+}
+
 body {
-    background-image: url('../images/Denmark.jpg'); /* Ret stien til dit billede */
-    background-size: cover; /* Sørger for, at billedet dækker hele skærmen */
-    background-repeat: no-repeat; /* Undgår gentagelse af billedet */
-    background-position: center center; /* Centrerer billedet */
-    min-height: 100vh; /* Sørger for, at body fylder mindst hele skærmhøjden */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: background-image 1s ease-in-out; /* Tilføj overgangseffekt */
+    min-height: 100vh;
     display: grid;
     grid-gap: 1em;
     grid-template-areas:
@@ -40,32 +92,19 @@ body {
         'footer';
     grid-template-rows: auto auto 1fr auto;
     grid-template-columns: 1fr;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 header, nav, main, footer {
-    background: #f4f4f4;
+    background: rgba(244, 244, 244, 0.8); /* Ændret til rgba med 0.8 gennemsigtighed */
     padding: 1em;
 }
 
-
 /* Mobile first layout */
-body {
-    min-height: 100vh; /* Sæt body-højden til mindst 100% af skærmhøjden */
-    display: grid; /* Aktiverer grid-layout */
-    grid-gap: 1em; /* Mellemrum mellem grid-områder */
-    grid-template-areas:
-        'header'  /* Headeren fylder hele bredden */
-        'nav'     /* Navigationen fylder hele bredden */
-        'main'    /* Hovedindholdet fylder hele bredden */
-        'footer'; /* Foderen fylder hele bredden */
-    grid-template-rows: auto auto 1fr auto; /* Højden på rækkerne */
-    grid-template-columns: 1fr; /* Kun én kolonne */
-}
-
-/* Bruges hvis min-width er 40em eller større */
 @media (min-width: 40em) {
     body {
-        /* Horisontal centrering, 80% bredde */
         width: 80%;
         margin: 0 auto;
         grid-template-areas:
@@ -76,3 +115,18 @@ body {
         grid-template-rows: auto 1fr auto; /* Højden på rækkerne */
     }
 }
+
+/* Baggrundsdiv styling */
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: opacity 1s ease-in-out;
+    z-index: -1; /* Sætter baggrundsdivet bag alle andre elementer */
+}
+

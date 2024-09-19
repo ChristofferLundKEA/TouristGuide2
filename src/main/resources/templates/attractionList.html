@@ -12,19 +12,22 @@
 <div id="background"></div>
 
 <header>
-    <h1>WELCOME TO YOUR GUIDE TO DENMARK</h1>
+    <img th:src="@{/images/turistguidelogo.png}" alt="Tourist Guide Logo" class="logo">
+    <h1 class="theheader">WELCOME TO YOUR GUIDE TO DENMARK</h1>
 </header>
 
+
 <nav>
-    <h2 class="slogan">Udforsk verden, én destination ad gangen!</h2>
-    <p class="description">Velkommen til din alt-i-en platform for turistattraktioner!<br>
-        Her kan du nemt oprette, administrere og dele attraktioner fra hele verden.<br>
-        Uanset om du er turist, lokal eller virksomhed, giver vi dig en enkel løsning til at fremhæve byens bedste oplevelser.
+    <h2 class="slogan">Experience Denmark - where adventure meets hygge!</h2>
+    <p class="description">Welcome to your all-in-one platform for tourist attractions!<br><br>
+        Here, you can easily add and discover attractions from all over Denmark.<br><br>
+        Whether you're a tourist or a local, we've got you covered!
     </p>
+
 </nav>
 
 <main>
-    <h1>Tourist Attractions:</h1>
+    <h1 class="overskrift">Tourist Attractions:</h1>
     <table id="attractiontable">
         <tr>
             <th>Attraction</th>
@@ -41,10 +44,10 @@
                     <button type="Tags">Tags</button>
                 </form>
                 <form th:action="@{'/' + ${attraction.name} + '/edit'}" method="get" style="display:inline;">
-                    <button type="submit">Edit</button>
+                    <button type="submit" class="editbutton">Edit</button>
                 </form>
                 <form th:action="@{'/' + ${attraction.name} + '/delete'}" method="get" style="display:inline;">
-                    <button type="submit">Delete</button>
+                    <button type="submit" class="deletebutton">Delete</button>
                 </form>
             </td>
         </tr>
@@ -53,7 +56,24 @@
     <button type="button" th:onclick="|window.location.href='/add'|">Add attraction</button>
 </main>
 
-<footer><h2>footer</h2></footer>
+    <footer class="footer">
+        <div class="footer-section">
+            <h3>Firma</h3>
+            <p>TouristGuide Aps</p>
+            <p>CVR: 0000000</p>
+        </div>
+        <div class="footer-section">
+            <h3>Adresse</h3>
+            <p>På Månen, 45</p>
+            <p>0000 Månestrup - <a href="#">Find vej</a></p>
+        </div>
+        <div class="footer-section">
+            <h3>Kontakt</h3>
+            <p>Telefon: 12 34 56 78</p>
+            <p>E-mail: goattouristguide@gmail.com</p>
+        </div>
+    </footer>
+
 
 <script>
     // Liste over baggrundsbilleder

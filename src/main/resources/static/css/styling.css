@@ -7,28 +7,33 @@
 table {
     width: 100%;
     border-collapse: collapse; /* Fjerner mellemrummene mellem cellerne */
-    margin-bottom: 20px; /* Giver lidt luft under tabellen */
+    margin-bottom: 20px;
+    background-color: white;
 }
 
 th, td {
-    padding: 12px 15px; /* Mere plads i cellerne */
-    text-align: left; /* Juster tekst til venstre */
+    padding: 12px 15px;
+    text-align: left;
     border: 1px solid #ddd; /* Diskrete linjer mellem cellerne */
 }
 
 th {
-    background-color: #0000FFFF; /* Lilla baggrundsfarve */
-    color: white; /* Hvid skriftfarve */
+    background-color: #3a79a1;
+    color: white;
     font-weight: bold;
-    text-transform: uppercase; /* Gør overskrifter til store bogstaver */
+    text-transform: uppercase;
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2; /* Lys grå baggrund for hver anden række */
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+    background-color: white;
 }
 
 tr:hover {
-    background-color: #ddd; /* Fremhæv række, når man holder musen over */
+    background-color: #ddd;
 }
 
 /* Knap styling i tabellen */
@@ -53,6 +58,19 @@ button[type="Tags"] {
 button[type="Tags"]:hover {
     background-color: #0056b3;
 }
+.deletebutton{
+    background-color: red;
+}
+
+.deletebutton:hover {
+    background-color: #cc0b0b;
+}
+.editbutton{
+    background-color: #ffd500;
+}
+.editbutton:hover {
+    background-color: #b89d2a;
+}
 
 /* Placering af indhold i grid-områder */
 header {
@@ -61,19 +79,43 @@ header {
 
 nav {
     grid-area: nav;
+    max-height: 450px;
 }
 
 main {
     grid-area: main;
+    max-height: 450px; /* Justerer højden af nav-sektionen */
+    overflow-y: auto;
 }
 
 footer {
     grid-area: footer;
+    background-color: #f2f2f2;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 kolonner */
+    gap: 20px;
+    text-align: left;
+    font-family: Arial, sans-serif;
+    color: #333;
+
 }
 
-/* Styling */
+.footer-section h3 {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer-section p {
+    margin: 5px 0;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
 html, body {
-    height: 100%; /* Sørger for, at html og body fylder hele skærmen */
+    height: 100%;
     margin: 0; /* Fjern margin for at sikre korrekt layout */
 }
 
@@ -89,7 +131,7 @@ body {
         'header'
         'nav'
         'main'
-        'footer';
+        'footer'; /* Sørger for, at footeren er inkluderet */
     grid-template-rows: auto auto 1fr auto;
     grid-template-columns: 1fr;
     margin: 0;
@@ -130,3 +172,40 @@ header, nav, main, footer {
     z-index: -1; /* Sætter baggrundsdivet bag alle andre elementer */
 }
 
+.slogan{
+    color: #3a79a1;
+    font-size: medium;
+    font-weight: bolder;
+}
+
+.description {
+    font-size: medium;
+}
+
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: rgba(244, 244, 244, 0.8); /* Bevarer gennemsigtigheden */
+}
+
+.logo {
+    width: 130px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.theheader {
+    color: #3a79a1;
+    font-size: 40px;
+    font-family: "Book Antiqua";
+    text-align: center;
+    flex: 1; 
+}
+
+
+.overskrift{
+    color: #3a79a1;
+}

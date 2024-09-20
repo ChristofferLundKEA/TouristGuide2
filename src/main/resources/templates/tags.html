@@ -2,21 +2,90 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link th:href="@{/css/styling.css}" rel="stylesheet">
-
     <title>Tags</title>
 </head>
+
 <body>
-<table>
-    <tr>
-        <th th:text="${attractionName} + ' tags'"> Tags </th>
-    </tr>
-    <tr th:each="tag : ${attraction}">
-        <td th:text="${tag}"></td>
-    </tr>
-</table>
-<form th:action="@{/attractions}" method="get">
-    <button type="submit">Back</button>
-</form>
+<div id="background"></div>
+
+<header>
+    <img th:src="@{/images/turistguidelogo.png}" alt="Tourist Guide Logo" class="logo">
+    <h1 class="theheader">Tags for the attraction</h1>
+</header>
+
+<nav>
+    <h2 class="slogan">Discover the tags for this attraction</h2>
+</nav>
+
+<main>
+    <table id="attractiontable">
+        <tr>
+            <th th:text="${attractionName} + ' tags'"> Tags </th>
+        </tr>
+        <tr th:each="tag : ${attraction}">
+            <td th:text="${tag}"></td>
+        </tr>
+    </table>
+
+    <form th:action="@{/attractions}" method="get">
+        <button type="submit">Back</button>
+    </form>
+</main>
+
+<footer class="footer">
+    <div class="footer-section">
+        <h3>Firma</h3>
+        <p>TouristGuide Aps</p>
+        <p>CVR: 0000000</p>
+    </div>
+    <div class="footer-section">
+        <h3>Adresse</h3>
+        <p>På Månen, 45</p>
+        <p>0000 Månestrup - <a href="#">Find vej</a></p>
+    </div>
+    <div class="footer-section">
+        <h3>Kontakt</h3>
+        <p>Telefon: 12 34 56 78</p>
+        <p>E-mail: goattouristguide@gmail.com</p>
+    </div>
+</footer>
+
+<script>
+    // Liste over baggrundsbilleder
+    const backgroundImages = [
+        '../images/Denmark.jpg',
+        '../images/Denmark1.jpg',
+        '../images/Denmark2.jpg',
+        '../images/Denmark3.webp',
+        '../images/Denmark4.jpg',
+        '../images/Denmark5.jpg',
+        '../images/Denmark6.jpg',
+    ];
+
+    let currentIndex = 0;
+
+    function changeBackground() {
+        const backgroundDiv = document.getElementById('background');
+        // Fade ud
+        backgroundDiv.style.transition = 'opacity 1s ease-in-out';
+        backgroundDiv.style.opacity = 0;
+
+        setTimeout(() => {
+            // Skift billede
+            backgroundDiv.style.backgroundImage = `url('${backgroundImages[currentIndex]}')`;
+            currentIndex = (currentIndex + 1) % backgroundImages.length;
+
+            // Fade ind
+            backgroundDiv.style.opacity = 1;
+        }, 1000); // Matcher overgangstiden fra fade ud
+
+        setTimeout(changeBackground, 5000); // Skift billede hvert 5. sekund
+    }
+
+    window.onload = changeBackground;
+</script>
 </body>
 </html>

@@ -20,8 +20,8 @@ public class TouristController {
     }
 
     @GetMapping("/") //redirect view to index.html at some point
-    public String tourist(Model model) {
-        return "attractionList";
+    public String tourist() {
+        return "redirect:/attractions";
     }
 
     @GetMapping("/attractions")

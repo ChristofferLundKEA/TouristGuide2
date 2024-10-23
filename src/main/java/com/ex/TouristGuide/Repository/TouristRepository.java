@@ -12,9 +12,9 @@ import java.util.List;
 @Repository
 public class TouristRepository {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/tourist_attractions_db";
-    private static final String USERNAME = "test";
-    private static final String PASSWORD = "test";
+    private static final String URL = "jdbc:mysql://touristguide-server.mysql.database.azure.com:3306/tourist_attractions_db?useSSL=true";
+    private static final String USERNAME = "adminadmin";
+    private static final String PASSWORD = "Goat1234";
 
     // Find all tourist attractions
     public List<TouristAttraction> findAll() {

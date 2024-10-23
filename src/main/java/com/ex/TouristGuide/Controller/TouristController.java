@@ -19,11 +19,13 @@ public class TouristController {
         this.touristService = touristService;
     }
 
-    @GetMapping("/") //redirect view to index.html at some point
+    // Redirect to the list of attractions
+    @GetMapping("/")
     public String tourist() {
         return "redirect:/attractions";
     }
 
+    // Display the list of all attractions
     @GetMapping("/attractions")
     public String showAttractions(Model model){
         List<TouristAttraction> attractions = touristService.get();
@@ -31,6 +33,7 @@ public class TouristController {
         return "attractionList";
     }
 
+    // Display the tags of a specific attraction
     @GetMapping("/{name}/tags")
     public String showTags(@PathVariable String name, Model model){
         TouristAttraction attraction = touristService.findByName(name);
@@ -39,6 +42,7 @@ public class TouristController {
         return "tags";
     }
 
+    // Show form to add a new attraction
     @GetMapping("/add")
     public String myForm(Model model) {
         TouristAttraction touristAttraction = new TouristAttraction();
@@ -48,6 +52,7 @@ public class TouristController {
         return "addAttraction";
     }
 
+    // Show form to edit an existing attraction
     @GetMapping("/{name}/edit")
     public String editAttraction(@PathVariable String name, Model model) {
         TouristAttraction attraction = touristService.findByName(name);
@@ -57,22 +62,23 @@ public class TouristController {
         return "editAttraction";
     }
 
+    // Save new or updated attraction
     @PostMapping("/save")
     public String submitForm(@ModelAttribute("myModel") TouristAttraction touristAttraction) {
-
         if (touristService.findByName(touristAttraction.getName()) == null) {
-            touristService.createAttraction(touristAttraction);
+            touristService.createAttraction(touristAttraction); // New attraction
         } else {
-            touristService.editAttraction(touristAttraction);
+            touristService.editAttraction(touristAttraction);  // Existing attraction
         }
         return "redirect:/attractions";
     }
 
+    // Delete an attraction by name
     @GetMapping("/{name}/delete")
-    public String deleteAttraction(@PathVariable String name, TouristAttraction touristAttraction) {
-
-        if (touristService.findByName(name) != null) {
-            touristService.deleteAttraction(touristAttraction);
+    public String deleteAttraction(@PathVariable String name) {
+        TouristAttraction attraction = touristService.findByName(name);
+        if (attraction != null) {
+            touristService.deleteAttraction(attraction);
         }
         return "redirect:/attractions";
     }
